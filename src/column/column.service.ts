@@ -49,6 +49,7 @@ export class ColumnService {
 
   async deleteColumn(UUID: string) {
     const column = await this.showColumn(UUID, []);
+		await this.cssClassService.deleteByColumnId(column.Id);
     await this.repo.remove(column);
     return column.Id === null;
   }
@@ -68,5 +69,13 @@ export class ColumnService {
       ColumnId,
     };
     return await this.cssClassService.createCssClass(createDTO);
+  }
+
+  async deleteByRowId(RowId: number) {
+    const columns = await this.repo.find({ where: { RowId } });
+    for (let column of columns) {
+      await this.cssClassService.deleteByColumnId(column.Id);
+      await this.repo.remove(column);
+    }
   }
 }

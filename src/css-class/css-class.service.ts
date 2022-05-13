@@ -45,4 +45,12 @@ export class CssClassService {
     await this.repo.remove(css_class);
     return css_class.Id === null;
   }
+
+  async deleteByColumnId(ColumnId: number) {
+    return await this.repo.delete({ ColumnId });
+  }
+
+  async deleteByRowId(RowId: number) {
+    return await this.repo.delete({ RowId });
+  }
 }

@@ -55,6 +55,8 @@ export class RowService {
 
   async deleteRow(UUID: string) {
     const row = await this.showRow(UUID);
+    await this.cssClassService.deleteByRowId(row.Id);
+    await this.columnService.deleteByRowId(row.Id);
     await this.repo.remove(row);
     return row.Id === null;
   }
