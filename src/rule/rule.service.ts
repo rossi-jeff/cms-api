@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Rule } from './rule.entity';
-import { CreateRuleDto } from '../global/dto';
+import { CreateRuleDto, SortDto } from '../global/dto';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -38,5 +38,14 @@ export class RuleService {
 
   async deleteByStyleId(StyleId: number) {
     return await this.repo.delete({ StyleId });
+  }
+
+  async sortRules(DTO: SortDto) {
+    const { Sorted } = DTO;
+    let Order = 0;
+    for (let Id of Sorted) {
+      await this.repo.update({ Id }, { Order });
+      Order++;
+    }
   }
 }

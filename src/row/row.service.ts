@@ -8,6 +8,7 @@ import {
   CreateColumnDto,
   CreateCssClassDbDto,
   CreateCssClassDto,
+  SortDto
 } from '../global/dto';
 import * as _ from 'lodash';
 import { ColumnService } from '../column/column.service';
@@ -93,5 +94,14 @@ export class RowService {
       RowId,
     };
     return await this.cssClassService.createCssClass(createDTO);
+  }
+
+  async sortRows(DTO: SortDto) {
+    const { Sorted } = DTO;
+    let Order = 0;
+    for (let Id of Sorted) {
+      await this.repo.update({ Id }, { Order });
+      Order++;
+    }
   }
 }

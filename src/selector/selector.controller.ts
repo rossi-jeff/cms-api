@@ -6,9 +6,10 @@ import {
   Body,
   Param,
   UseGuards,
+  Post,
 } from '@nestjs/common';
 import { SelectorService } from './selector.service';
-import { CreateSelectorDto, ResponseSelectorDto } from '../global/dto';
+import { CreateSelectorDto, ResponseSelectorDto, SortDto } from '../global/dto';
 import { ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -40,5 +41,13 @@ export class SelectorController {
   @UseGuards(AuthGuard('jwt'))
   async deleteSelector(@Param('UUID') UUID: string) {
     return await this.service.deleteSelector(UUID);
+  }
+
+  @Post('sort')
+  @ApiBearerAuth()
+  @ApiResponse({ status: 204, description: 'NO CONTENT' })
+  @UseGuards(AuthGuard('jwt'))
+  async sortSelectors(@Body() DTO: SortDto) {
+    return await this.service.sortSelectors(DTO);
   }
 }

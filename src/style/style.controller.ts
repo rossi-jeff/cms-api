@@ -16,6 +16,7 @@ import {
   ResponseSelectorDto,
   CreateRuleDto,
   ResponseRuleDto,
+  SortDto,
 } from '../global/dto';
 import { ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
@@ -72,5 +73,13 @@ export class StyleController {
   @UseGuards(AuthGuard('jwt'))
   async createRule(@Param('UUID') UUID: string, @Body() DTO: CreateRuleDto) {
     return await this.service.createRule(UUID, DTO);
+  }
+
+  @Post('sort')
+  @ApiBearerAuth()
+  @ApiResponse({ status: 204, description: 'NO CONTENT' })
+  @UseGuards(AuthGuard('jwt'))
+  async sortStyles(@Body() DTO: SortDto) {
+    return await this.service.sortStyles(DTO);
   }
 }

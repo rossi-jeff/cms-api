@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Selector } from './selector.entity';
-import { CreateSelectorDto } from '../global/dto';
+import { CreateSelectorDto, SortDto } from '../global/dto';
 import * as _ from 'lodash';
 
 @Injectable()
@@ -38,5 +38,14 @@ export class SelectorService {
 
   async deleteByStyleId(StyleId: number) {
     return await this.repo.delete({ StyleId });
+  }
+
+  async sortSelectors(DTO: SortDto) {
+    const { Sorted } = DTO;
+    let Order = 0;
+    for (let Id of Sorted) {
+      await this.repo.update({ Id }, { Order });
+      Order++;
+    }
   }
 }

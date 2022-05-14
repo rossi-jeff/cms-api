@@ -6,11 +6,12 @@ import {
   Body,
   Param,
   UseGuards,
+  Post,
 } from '@nestjs/common';
 import { RuleService } from './rule.service';
 import { ApiResponse, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
-import { CreateRuleDto, ResponseRuleDto } from '../global/dto';
+import { CreateRuleDto, ResponseRuleDto, SortDto } from '../global/dto';
 
 @ApiTags('Rules')
 @Controller('rule')
@@ -37,5 +38,13 @@ export class RuleController {
   @UseGuards(AuthGuard('jwt'))
   async deleteRule(@Param('UUID') UUID: string) {
     return await this.service.deleteRule(UUID);
+  }
+
+  @Post('sort')
+  @ApiBearerAuth()
+  @ApiResponse({ status: 204, description: 'NO CONTENT' })
+  @UseGuards(AuthGuard('jwt'))
+  async sortRules(@Body() DTO: SortDto) {
+    return await this.service.sortRules(DTO);
   }
 }

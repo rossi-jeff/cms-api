@@ -18,6 +18,7 @@ import {
   ResponseRowDto,
   ResponseCssClassDto,
   CreateCssClassDto,
+  SortDto,
 } from '../global/dto';
 
 @ApiTags('Rows')
@@ -79,5 +80,13 @@ export class RowController {
     @Body() DTO: CreateCssClassDto,
   ) {
     return await this.service.createCssClass(UUID, DTO);
+  }
+
+  @Post('sort')
+  @ApiBearerAuth()
+  @ApiResponse({ status: 204, description: 'NO CONTENT' })
+  @UseGuards(AuthGuard('jwt'))
+  async sortRows(@Body() DTO: SortDto) {
+    return await this.service.sortRows(DTO);
   }
 }

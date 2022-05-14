@@ -6,6 +6,7 @@ import {
   CreateStyleDto,
   CreateSelectorDto,
   CreateRuleDto,
+  SortDto,
 } from '../global/dto';
 import * as _ from 'lodash';
 import { SelectorService } from '../selector/selector.service';
@@ -78,5 +79,14 @@ export class StyleService {
   async createRule(UUID: string, DTO: CreateRuleDto) {
     const style = await this.showStyle(UUID, []);
     return await this.ruleService.createRule(DTO, style.Id);
+  }
+
+  async sortStyles(DTO: SortDto) {
+    const { Sorted } = DTO;
+    let Order = 0;
+    for (let Id of Sorted) {
+      await this.repo.update({ Id }, { Order });
+      Order++;
+    }
   }
 }

@@ -16,6 +16,7 @@ import {
   ResponseColumnDto,
   ResponseCssClassDto,
   CreateCssClassDto,
+  SortDto,
 } from '../global/dto';
 
 @ApiTags('Columns')
@@ -63,5 +64,13 @@ export class ColumnController {
     @Body() DTO: CreateCssClassDto,
   ) {
     return await this.service.createCssClass(UUID, DTO);
+  }
+
+  @Post('sort')
+  @ApiBearerAuth()
+  @ApiResponse({ status: 204, description: 'NO CONTENT' })
+  @UseGuards(AuthGuard('jwt'))
+  async sortColumns(@Body() DTO: SortDto) {
+    return await this.service.sortColumns(DTO);
   }
 }

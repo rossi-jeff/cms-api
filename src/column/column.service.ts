@@ -7,6 +7,7 @@ import {
   CreateColumnDto,
   CreateCssClassDbDto,
   CreateCssClassDto,
+  SortDto
 } from '../global/dto';
 import * as _ from 'lodash';
 import { CssClassService } from '../css-class/css-class.service';
@@ -76,6 +77,15 @@ export class ColumnService {
     for (let column of columns) {
       await this.cssClassService.deleteByColumnId(column.Id);
       await this.repo.remove(column);
+    }
+  }
+
+  async sortColumns(DTO: SortDto) {
+    const { Sorted } = DTO;
+    let Order = 0;
+    for (let Id of Sorted) {
+      await this.repo.update({ Id }, { Order });
+      Order++;
     }
   }
 }

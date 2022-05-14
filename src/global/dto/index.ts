@@ -21,4 +21,5 @@ export { ResponseSelectorDto } from './response-selector.dto';
 export { ResponseSiteDto } from './response-site.dto';
 export { ResponseStyleDto } from './response-style.dto';
 export { ResponseUserDto } from './response-user.dto';
+export { SortDto } from './sort.dto';
 export { UpdateUserDto } from './update-user.dto';
