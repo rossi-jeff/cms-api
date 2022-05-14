@@ -10,6 +10,7 @@ import { RowModule } from './row/row.module';
 import { ColumnModule } from './column/column.module';
 import { AuthModule } from './auth/auth.module';
 import { CssClassModule } from './css-class/css-class.module';
+import { StylesheetModule } from './stylesheet/stylesheet.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CssClassModule } from './css-class/css-class.module';
     ColumnModule,
     AuthModule,
     CssClassModule,
+    StylesheetModule,
   ],
 })
 export class AppModule {}
