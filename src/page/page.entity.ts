@@ -19,7 +19,7 @@ export class Page extends BaseModel {
   @Column()
   Slug: string;
 
-  @Column({ type: 'bigint' })
+  @Column({ type: 'int' })
   SiteId: number;
 
   @ManyToOne((type) => Site)

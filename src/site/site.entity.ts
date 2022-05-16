@@ -9,7 +9,7 @@ export class Site extends BaseModel {
   @Column()
   Name: string;
 
-  @Column({ type: 'bigint' })
+  @Column({ type: 'int' })
   UserId: number;
 
   @ManyToOne((type) => User)
