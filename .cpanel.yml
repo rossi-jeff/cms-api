@@ -3,6 +3,3 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/jeffross/cms-api.jeff-rossi.com
     - /bin/cp -R * $DEPLOYPATH
-    - /bin/cd $DEPLOYPATH
-    - /bin/npm i
-    - /bin/npm run build
