@@ -4,7 +4,8 @@ deployment:
     - export DEPLOYPATH=/home/jeffross/cms-api.jeff-rossi.com
     - export SHAREDPATH=/home/jeffross/shared/node_modules
     - export LINKTARGET=/home/jeffross/cms-api.jeff-rossi.com/node_modules
-    - /bin/npm i --production
+    - export NODE_ENV=production
+    - /bin/npm i
     - /bin/npm run build
     - /bin/cp ormconfig.js $DEPLOYPATH
     - /bin/cp package.json $DEPLOYPATH
