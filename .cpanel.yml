@@ -2,16 +2,11 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/jeffross/cms-api.jeff-rossi.com
-    - export SHAREDPATH=/home/jeffross/shared/node_modules
-    - export LINKTARGET=/home/jeffross/cms-api.jeff-rossi.com/node_modules
-    - export NODE_ENV=production
     - /bin/npm i
     - /bin/npm run build
     - /bin/cp ormconfig.js $DEPLOYPATH
     - /bin/cp package.json $DEPLOYPATH
     - /bin/cp .htaccess $DEPLOYPATH
     - /bin/cp -r dist $DEPLOYPATH
-    - /bin/cp -r -n node_modules/* $SHAREDPATH
-    - /bin/ln -s $SHAREDPATH $LINKTARGET
     - /bin/rm -rf node_modules
     - /bin/rm -rf dist/*
