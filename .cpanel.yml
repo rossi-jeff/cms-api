@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/jeffross/applications/cms-api.jeff-rossi.com
+    - export DEPLOYPATH=/home/jeffross/applications/cmsapi
     - /bin/cp -R * $DEPLOYPATH
